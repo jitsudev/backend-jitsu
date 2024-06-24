@@ -8,7 +8,7 @@ export type stateType = {
 };
 
 export async function createCategory(previousState: stateType, formData: FormData) {
-	const title = formData.get("title");
+	const title = formData.get("title") as string;
 
 	if (title == "") {
 		return { message: "", error: "O campo não pode ficar em branco" };
