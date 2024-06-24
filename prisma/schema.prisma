@@ -10,10 +10,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:admin@localhost:5432/jitsu"
+  url      = env("DATABASE_URL")
 }
-
-//DATABASE_URL="postgresql://postgres:m4R1nh05%25@jitsu.cpk6w2myqy0a.us-east-2.rds.amazonaws.com:5432/jitsu?schema=sample"
 
 model User {
   id      Int      @id @default(autoincrement())
