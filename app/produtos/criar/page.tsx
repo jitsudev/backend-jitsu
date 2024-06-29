@@ -1,6 +1,7 @@
 import CategorySelect from "@/app/components/category_selector";
+import ColorSelector from "@/app/components/color_selector";
 import ProductPrice from "@/app/components/product_price";
-import SizeSelect from "@/app/components/sizes-selector";
+import SizeSelect from "@/app/components/sizes_selector";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
 
@@ -30,30 +31,8 @@ export default function Page() {
 						<input type="file" />
 					</div>
 					<div className="flex m-2 gap-4">
-						<div>
-							<input type="checkbox" name="color" value="white" />
-							Branco
-						</div>
-						<div>
-							<input type="checkbox" name="color" value="black" />
-							Preto
-						</div>
-						<div>
-							<input type="checkbox" name="color" value="yellow" />
-							Amarelo
-						</div>
-						<div>
-							<input type="checkbox" name="color" value="red" />
-							Vermelho
-						</div>
-						<div>
-							<input type="checkbox" name="color" value="navy" />
-							Marinho
-						</div>
-						<div>
-							<input type="checkbox" name="color" value="mescla" />
-							Cinza Mescla
-						</div>
+						<span>Cores disponíveis para este produto:</span>
+						<ColorSelector colors={["Preto", "Branco"]} />
 					</div>
 					<div>Preview</div>
 					<button className="bg-green-500 rounded-lg p-2">Adicionar</button>

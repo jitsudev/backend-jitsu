@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL")
+  url      = "postgresql://postgres:admin@localhost:5432/jitsu"//env("POSTGRES_PRISMA_URL")
 }
 
 model User {
@@ -20,6 +20,16 @@ model User {
   email       String
   password    String
 }
+
+model ProdutoBase{
+  id          Int      @id @default(autoincrement())
+  name        String
+  cost        String
+  composition String
+  sku         String
+  cores       String @default("Branca")
+}
+
 
 model Produto {
   id      Int      @id @default(autoincrement())

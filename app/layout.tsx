@@ -24,7 +24,7 @@ export default function RootLayout({
 						<UserCard />
 						<Menu />
 					</div>
-					<div className="flex flex-col w-10/12 justify-start items-center p-5">{children}</div>
+					<div className="flex flex-col w-10/12 justify-start p-5">{children}</div>
 				</div>
 			</body>
 		</html>

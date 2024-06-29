@@ -15,10 +15,21 @@ export default async function Menu() {
 					<Link href="/pedidos">Pedidos</Link>
 				</li>
 				<li>
+					<span>Produtos Base</span>
+					<ul className="flex flex-col ml-3">
+						<li>
+							<Link href="/produtobase">Lista</Link>
+						</li>
+						<li>
+							<Link href="/produtobase/criar">Adicionar</Link>
+						</li>
+					</ul>
+				</li>
+				<li>
 					<span>Produtos</span>
 					<ul className="flex flex-col ml-3">
 						<li>
-							<Link href="/produtos">Listagem</Link>
+							<Link href="/produtos">Produtos cadastrados</Link>
 						</li>
 						<li>
 							<Link href="/produtos/criar">Criar produto</Link>
