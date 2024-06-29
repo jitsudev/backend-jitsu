@@ -1,3 +1,4 @@
+import CategorySelect from "@/app/components/category_selector";
 import ProductPrice from "@/app/components/product_price";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
@@ -106,7 +107,9 @@ export default function Page() {
 					</div>
 				</div>
 				<ProductPrice price={{ price: 70, discountType: "valor", discount: 5 }} />
-
+				<div className="flex flex-col text-white w-full">
+					Categorias: <CategorySelect />
+				</div>
 				<div className="flex w-full justify-end">
 					<button className="w-1/4 bg-green-500 rounded-lg p-2">Criar produto</button>
 				</div>

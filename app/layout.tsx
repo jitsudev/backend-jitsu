@@ -19,7 +19,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<div className="flex bg-gray-500 h-screen">
+				<div className="flex bg-gray-500 h-full">
 					<div className="flex flex-col gap-5 w-2/12 bg-white p-5">
 						<UserCard />
 						<Menu />
