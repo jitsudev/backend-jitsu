@@ -5,8 +5,8 @@ export default async function CategorySelect({ initialvalue }: { initialvalue?: 
 
 	return (
 		<div className="flex justify-between w-full p-2 border-2 rounded">
-			{categorias?.map((cat) => (
-				<div className="text-white capitalize">
+			{categorias?.map((cat, i) => (
+				<div key={i} className="text-white capitalize">
 					<input type="checkbox" name="categorias" value={cat.title} checked={initialvalue?.includes(cat.title)} className="mr-2" />
 					{cat.title}
 				</div>

@@ -1,12 +1,13 @@
 import CategorySelect from "@/app/components/category_selector";
 import ProductPrice from "@/app/components/product_price";
+import SizeSelect from "@/app/components/sizes-selector";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
 
 export default function Page() {
 	return (
 		<div className="flex flex-col justify-between w-full">
-			<span>Selecione o tipo de produto:</span>
+			<span className="text-white mb-2">Selecione o tipo de produto:</span>
 			<form action="" className="flex flex-col gap-4">
 				<div className="flex gap-3">
 					<button className="rounded-lg text-white p-2 border-2">Camisa</button>
@@ -14,51 +15,13 @@ export default function Page() {
 					<button className="rounded-lg text-white p-2 border-2">Babylook</button>
 					<button className="rounded-lg text-white p-2 border-2">Moleton</button>
 				</div>
-				<div>
-					Título: <input type="text" name="title" placeholder="Ex. Camisa Masculina - Armlock" />
+				<div className="flex flex-col text-white">
+					Título: <input type="text" name="title" placeholder="Ex. Camisa Masculina - Armlock" className="w-full p-2 bg-transparent text-white rounded border-2" />
 				</div>
 
 				<div>
-					<span>Tamanhos disponíveis:</span>
-					<div className="flex gap-4">
-						<div>
-							<input type="checkbox" name="size" value={"P"} checked />P
-						</div>
-						<div>
-							<input type="checkbox" name="size" value={"M"} checked />M
-						</div>
-						<div>
-							<input type="checkbox" name="size" value={"G"} checked />G
-						</div>
-						<div>
-							<input type="checkbox" name="size" value={"GG"} checked />
-							GG
-						</div>
-						<div>
-							<input type="checkbox" name="size" value={"XGG"} checked />
-							XGG
-						</div>
-						<div>
-							<input type="checkbox" name="size" value={"G1"} checked />
-							G1
-						</div>
-						<div>
-							<input type="checkbox" name="size" value={"G2"} checked />
-							G2
-						</div>
-						<div>
-							<input type="checkbox" name="size" value={"G3"} checked />
-							G3
-						</div>
-						<div>
-							<input type="checkbox" name="size" value={"G4"} checked />
-							G4
-						</div>
-						<div>
-							<input type="checkbox" name="size" value={"U"} />
-							Único
-						</div>
-					</div>
+					<span className="text-white mb-2">Tamanhos disponíveis:</span>
+					<SizeSelect initialSizes={["P", "M", "G", "GG", "XGG", "G4", "U"]} />
 				</div>
 				<div className="flex flex-col border-2 p-4">
 					<div className="mb-4">Adicionar estampa relativa a variação de cor:</div>
