@@ -1,8 +1,9 @@
 import Link from "next/link";
 import prisma from "../client";
-import DeleteButton from "./delete_button";
+import DeleteButton from "./delete/delete_button";
 import ListaCores from "./lista_cores";
 import EditButton from "./edit_button";
+import { Trash2 } from "lucide-react";
 
 export default async function ListaProdutosBase() {
 	const produtos = await prisma.produtoBase.findMany({ orderBy: { name: "asc" } });
@@ -32,7 +33,9 @@ export default async function ListaProdutosBase() {
 							</div>
 							<div className="flex flex-col justify-around items-center h-full gap-2">
 								<EditButton produto={produto} />
-								<DeleteButton produto={produto} />
+								<Link href={`/produtobase/delete/${produto.id}`} className="flex items-center justify-center bg-red-500 p-2 rounded-full">
+									<Trash2 size={15} stroke="white" />
+								</Link>
 							</div>
 						</div>
 					</div>

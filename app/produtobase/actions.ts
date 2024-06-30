@@ -1,12 +1,14 @@
 "use server";
 import prisma from "../client";
 import { ProdutoBase } from "@prisma/client";
+import { ExecException } from "child_process";
+import { error } from "console";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export type stateType = {
-	message: String;
-	error: String;
+	message: string;
+	error: string;
 };
 
 function ArrayToString(name: string, formData: FormData) {
@@ -54,7 +56,14 @@ export async function createProduto(previousState: stateType, formData: FormData
 export async function deleteProduto(produto: ProdutoBase) {
 	const _produto = await prisma.produtoBase.delete({ where: { id: produto.id } });
 	revalidatePath("/produtobase");
-	return { message: "ok" };
+	redirect("/produtobase");
+}
+
+export async function deleteProdutoFromModal(previousState: stateType, formData: FormData) {
+	const id = parseInt(formData.get("id") as string);
+	const _produto = await prisma.produtoBase.delete({ where: { id } });
+	revalidatePath("/produtobase");
+	return { message: "ok", error: "" };
 }
 
 export async function updateProduto(previousState: stateType, formData: FormData) {

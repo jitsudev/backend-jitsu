@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ListaProdutosBase from "./lista";
 
 export default function Page() {
