@@ -21,6 +21,16 @@ model User {
   password    String
 }
 
+
+model Catalogo {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  estilo      String
+  cor         String
+  tamanho     String
+  sku         String
+}
+
 model ProdutoBase{
   id          Int      @id @default(autoincrement())
   name        String

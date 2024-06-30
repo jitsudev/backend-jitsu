@@ -18,6 +18,9 @@ export default async function Menu() {
 					<span>Produtos Base</span>
 					<ul className="flex flex-col ml-3">
 						<li>
+							<Link href="/produtobase/catalogo">Catalogo</Link>
+						</li>
+						<li>
 							<Link href="/produtobase">Lista</Link>
 						</li>
 						<li>
