@@ -1,6 +1,9 @@
 "use server";
 
 export async function checkAvaliabilityBySku(sku: string) {
+	// Camisas Dimona
+	// Teste: https://camisadimona.com.br/api/v2/sku/010110110108/availability
+
 	const _base = "https://camisadimona.com.br";
 	const _url = `${_base}/api/v2/sku/${sku}/availability`;
 
