@@ -48,7 +48,7 @@ export async function createProduto(previousState: stateType, formData: FormData
 	});
 
 	revalidatePath("/produtobase");
-	return { message: "ok", error: "" };
+	redirect("/produtobase");
 }
 
 export async function deleteProduto(produto: ProdutoBase) {
@@ -58,7 +58,7 @@ export async function deleteProduto(produto: ProdutoBase) {
 }
 
 export async function updateProduto(previousState: stateType, formData: FormData) {
-	const _id = formData.get("id") as string;
+	const _id = parseInt(formData.get("id") as string);
 	const name = formData.get("name") as string;
 	const cost = formData.get("cost") as string;
 	const composition = formData.get("composition") as string;
@@ -69,7 +69,13 @@ export async function updateProduto(previousState: stateType, formData: FormData
 		return { message: "", error: "Os campos não podem ficar em branco" };
 	}
 
-	const _produto = await prisma.produtoBase.update({ where: { id: parseInt(_id) }, data: { name, cost, composition, sku, cores: cores.join(",") } });
+	const existing = await prisma.produtoBase.findFirst({ where: { name: { contains: name, mode: "insensitive" }, id: { not: _id } } });
+
+	if (existing) {
+		return { message: "", error: "Este produto já existe" };
+	}
+
+	const _produto = await prisma.produtoBase.update({ where: { id: _id }, data: { name, cost, composition, sku, cores: cores.join(",") } });
 	revalidatePath("/produtobase");
-	return { message: "ok" };
+	redirect("/produtobase");
 }

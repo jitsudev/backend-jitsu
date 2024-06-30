@@ -38,9 +38,11 @@ export default async function ListaProdutosBase() {
 					</div>
 				))}
 			</div>
-			<Link href={"/produtobase/criar"} className="bg-green-500 text-white p-2 rounded text-center">
-				Adicionar novo produto
-			</Link>
+			<div className="flex justify-between">
+				<Link href={"/produtobase/criar"} className="bg-green-500 text-white p-2 w-full rounded text-center">
+					Adicionar novo produto
+				</Link>
+			</div>
 		</div>
 	);
 }

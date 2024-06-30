@@ -7,6 +7,7 @@ import { SubmitButton } from "@/app/components/submitButton";
 import CoresDisponiveis from "../criar/cores";
 import { ChangeEvent, useState } from "react";
 import { updateProp } from "@/app/util/tools";
+import Link from "next/link";
 
 type FormStateType = {
 	message: String;
@@ -29,7 +30,6 @@ export default function FormUpdateProdutoBase({ produto }: { produto: ProdutoBas
 
 	return (
 		<form action={formAction} method="POST" className="flex flex-col gap-4" encType="application/json">
-			{formstate.error ? <span>{formstate.error}</span> : null}
 			<input type="hidden" name="id" value={state.id} />
 			<input type="text" name="name" placeholder="Camisa Quality" className="rounded p-2" value={state.name} onChange={handleChange} />
 			<input type="text" name="cost" placeholder="39,90" className="rounded p-2" value={state.cost} onChange={handleChange} />
@@ -38,8 +38,17 @@ export default function FormUpdateProdutoBase({ produto }: { produto: ProdutoBas
 			<div className="flex border-2 rounded p-2 justify-center items-center">
 				<CoresDisponiveis cores={state.cores} />
 			</div>
-
-			<SubmitButton className="bg-green-500 rounded text-white p-2">Atualizar Produto</SubmitButton>
+			{formstate.error ? (
+				<div className="flex w-full bg-red-200 rounded p-4 justify-center items-center">
+					<span>{formstate.error}</span>
+				</div>
+			) : null}
+			<div className="flex justify-between">
+				<Link href={"/produtobase"} className="bg-gray-400 p-2 rounded text-center w-1/4">
+					Voltar
+				</Link>
+				<SubmitButton className="bg-green-500 rounded w-2/4 text-white p-2">Atualizar Produto</SubmitButton>
+			</div>
 		</form>
 	);
 }

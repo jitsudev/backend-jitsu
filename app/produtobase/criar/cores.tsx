@@ -2,7 +2,7 @@
 import { CORES, Cor } from "@/app/util/dimona";
 import { ChangeEvent, useState } from "react";
 
-export default function CoresDisponiveis({ cores }: { cores: string }) {
+export default function CoresDisponiveis({ cores }: { cores?: string }) {
 	const initial = cores ? cores.split(",") : CORES.map((cor) => cor.nome);
 	const [checked, setChecked] = useState<Array<string>>(initial);
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
