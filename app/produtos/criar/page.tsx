@@ -4,18 +4,14 @@ import ProductPrice from "@/app/components/product_price";
 import SizeSelect from "@/app/components/sizes_selector";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
+import ProdutoBaseSelector from "../(ui)/produtobase-selector";
 
 export default function Page() {
 	return (
 		<div className="flex flex-col justify-between w-full">
 			<span className="text-white mb-2">Selecione o tipo de produto:</span>
 			<form action="" className="flex flex-col gap-4">
-				<div className="flex gap-3">
-					<button className="rounded-lg text-white p-2 border-2">Camisa</button>
-					<button className="rounded-lg text-white p-2 border-2">Regata</button>
-					<button className="rounded-lg text-white p-2 border-2">Babylook</button>
-					<button className="rounded-lg text-white p-2 border-2">Moleton</button>
-				</div>
+				<ProdutoBaseSelector />
 				<div className="flex flex-col text-white">
 					Título: <input type="text" name="title" placeholder="Ex. Camisa Masculina - Armlock" className="w-full p-2 bg-transparent text-white rounded border-2" />
 				</div>
