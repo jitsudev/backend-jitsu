@@ -1,11 +1,9 @@
-import { createProduto } from "../actions";
-import FormCreateProdutoBase from "./form";
+import FormCreate from "./form_create";
 
-export default function Page() {
+export default async function Page() {
 	return (
 		<div>
-			Criar produto base
-			<FormCreateProdutoBase />
+			<FormCreate />
 		</div>
 	);
 }

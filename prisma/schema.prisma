@@ -37,8 +37,8 @@ model ProdutoBase{
   name        String
   cost        String
   composition String
-  sku         String
-  cores       String @default("Branca")
+  cores       String
+  tamanhos    String
 }
 
 

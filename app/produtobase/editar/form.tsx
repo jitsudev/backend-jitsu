@@ -4,7 +4,7 @@ import { ProdutoBase } from "@prisma/client";
 import { useFormState } from "react-dom";
 import { updateProduto } from "../actions";
 import { SubmitButton } from "@/app/components/submitButton";
-import CoresDisponiveis from "../criar/cores";
+import CoresDisponiveis from "../criar/cores_disponiveis";
 import { ChangeEvent, useState } from "react";
 import { updateProp } from "@/app/util/tools";
 import Link from "next/link";

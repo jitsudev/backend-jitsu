@@ -1,6 +1,6 @@
 "use server";
 import prisma from "../client";
-import { ProdutoBase } from "@prisma/client";
+import { Catalogo, ProdutoBase } from "@prisma/client";
 import { ExecException } from "child_process";
 import { error } from "console";
 import { revalidatePath } from "next/cache";
@@ -26,10 +26,11 @@ export async function createProduto(previousState: stateType, formData: FormData
 	const name = formData.get("name") as string;
 	const cost = formData.get("cost") as string;
 	const composition = formData.get("composition") as string;
-	const sku = formData.get("sku") as string;
-	var cores = ArrayToString("cores[]", formData);
 
-	if (!name || !cost || !composition || !sku || cores.length == 0) {
+	var cores = ArrayToString("cores[]", formData);
+	var tamanhos = ArrayToString("tamanhos[]", formData);
+
+	if (!name || !cost || !composition || cores.length == 0 || tamanhos.length == 0) {
 		return { message: "", error: "Os campos não podem ficar em branco" };
 	}
 
@@ -44,8 +45,8 @@ export async function createProduto(previousState: stateType, formData: FormData
 			name,
 			cost,
 			composition,
-			sku,
 			cores: cores.join(","),
+			tamanhos: tamanhos.join(","),
 		},
 	});
 
@@ -87,4 +88,23 @@ export async function updateProduto(previousState: stateType, formData: FormData
 	const _produto = await prisma.produtoBase.update({ where: { id: _id }, data: { name, cost, composition, sku, cores: cores.join(",") } });
 	revalidatePath("/produtobase");
 	redirect("/produtobase");
+}
+
+/**
+ * Retorna um array com os nomes distintos dos produtos
+ */
+export async function getNomesProdutos() {
+	return (await prisma.catalogo.findMany({ where: {}, distinct: "nome" })).flatMap(({ nome }) => nome);
+}
+
+export async function getCoresProduto(nome: string) {
+	return (await prisma.catalogo.findMany({ where: { nome }, distinct: "cor" })).flatMap(({ cor }) => cor);
+}
+
+export async function getTamanhosProduto(nome: string) {
+	return (await prisma.catalogo.findMany({ where: { nome }, distinct: "tamanho" })).flatMap(({ tamanho }) => tamanho);
+}
+
+export async function getProdutosByNome(nome: string) {
+	return await prisma.catalogo.findMany({ where: { nome } });
 }

@@ -1,11 +1,8 @@
 import prisma from "@/app/client";
 import CorCircle from "@/app/components/cor_circle";
 import AvaliabilityChecker from "./avaliability";
-import { Suspense } from "react";
 import CatalogFilters from "./filters";
 import { Prisma } from "@prisma/client";
-
-const Loading = () => <div>Verificando...</div>;
 
 export default async function ProdutoBaseSelector({ params, searchParams }: { params: { slug: string }; searchParams: { [key: string]: string | string[] | undefined } }) {
 	const { nome, cor, tamanho, estilo, sku, ordenarpor, ordem } = searchParams;
@@ -29,27 +26,26 @@ export default async function ProdutoBaseSelector({ params, searchParams }: { pa
 		<div className="flex flex-col h-full">
 			<CatalogFilters />
 			<div className="flex justify-between items-center gap-2 bg-black text-white mb-2 p-2 rounded">
-				<span className="w-1/6">Nome </span>
-				<span className="w-1/6">Estilo </span>
-				<span className="w-1/6">Tamanho </span>
-				<span className="w-1/6">Cor</span>
-				<span className="w-1/6">SKU</span>
-				<span className="w-1/6">Disponibilidade</span>
+				<span className="w-3/12">Nome </span>
+				<span className="w-2/12">Estilo </span>
+				<span className="w-1/12">Tamanho </span>
+				<span className="w-2/12">Cor</span>
+				<span className="w-2/12">SKU</span>
+				<span className="w-2/12">Disponibilidade</span>
 			</div>
+
 			{_produto.map((produto) => (
 				<div key={produto.id} className="flex justify-between items-center bg-gray-200 mb-2 p-2 rounded">
-					<span className="w-1/6 flex items-center gap-2">
+					<span className="w-3/12 flex items-center gap-2">
 						<CorCircle nome={produto.cor} />
 						{produto.nome}{" "}
 					</span>
-					<span className="w-1/6">{produto.estilo} </span>
-					<span className="w-1/6">{produto.tamanho} </span>
-					<span className="w-1/6"> {produto.cor}</span>
-					<span className="w-1/6"> {produto.sku}</span>
-					<span className="w-1/6">
-						<Suspense fallback={<Loading />}>
-							<AvaliabilityChecker sku={produto.sku} />
-						</Suspense>
+					<span className="w-2/12">{produto.estilo} </span>
+					<span className="w-1/12">{produto.tamanho} </span>
+					<span className="w-2/12"> {produto.cor}</span>
+					<span className="w-2/12"> {produto.sku}</span>
+					<span className="w-2/12">
+						<AvaliabilityChecker sku={produto.sku} />
 					</span>
 				</div>
 			))}

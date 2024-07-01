@@ -3,13 +3,16 @@
 import { useFormState } from "react-dom";
 import { createProduto } from "../actions";
 import { SubmitButton } from "@/app/components/submitButton";
-import CoresDisponiveis from "./cores";
+import CoresDisponiveis from "./cores_disponiveis";
 import Link from "next/link";
+import SeletorProduto from "./form_create";
 
 type FormStateType = {
 	message: String;
 	error: String;
 };
+
+const Loading = () => <div>Loading...</div>;
 
 export default function FormCreateProdutoBase() {
 	const initialState: FormStateType = {
@@ -21,10 +24,8 @@ export default function FormCreateProdutoBase() {
 
 	return (
 		<form action={formAction} method="POST" className="flex flex-col gap-4" encType="application/json">
-			<input type="text" name="name" placeholder="Camisa Quality" className="rounded p-2" />
 			<input type="text" name="cost" placeholder="39,90" className="rounded p-2" />
 			<input type="text" name="composition" placeholder="100% Algodão" className="rounded p-2" />
-			<input type="text" name="sku" placeholder="01101" className="rounded p-2" />
 			<div className="flex border-2 rounded p-2 justify-center items-center">
 				<CoresDisponiveis />
 			</div>

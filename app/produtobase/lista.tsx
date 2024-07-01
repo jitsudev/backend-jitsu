@@ -16,17 +16,22 @@ export default async function ListaProdutosBase() {
 							<div className="flex flex-col w-full mr-4">
 								<div className="text-2xl font-bold mb-3">{produto.name}</div>
 								<div className="flex w-full text-xs">
-									<div className="flex flex-col w-3/12 ">
+									<div className="flex flex-col w-2/12 ">
 										<span className="font-bold">Composição:</span>
 										<span> {produto.composition}</span>
 									</div>
 									<div className="flex flex-col w-2/12 ">
 										<span className="font-bold">Custo:</span> <span>R${produto.cost}</span>
 									</div>
-									<div className="flex flex-col w-2/12">
-										<span className="font-bold">SKU:</span> <span>{produto.sku}</span>
+									<div className="flex flex-col w-4/12">
+										<span className="font-bold">Tamanhos:</span>
+										<div className="flex flex-wrap gap-1">
+											{produto.tamanhos.split(",").map((t) => (
+												<span>{t}</span>
+											))}
+										</div>
 									</div>
-									<div className="flex flex-col w-6/12">
+									<div className="flex flex-col w-4/12">
 										<span className="font-bold">Cores:</span> <ListaCores cores={produto.cores.split(",")} />
 									</div>
 								</div>
