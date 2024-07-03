@@ -21,6 +21,9 @@ export default async function Menu() {
 							<Link href="/produtobase/catalogo">Catalogo</Link>
 						</li>
 						<li>
+							<Link href="/produtobase/mockups">Mockups</Link>
+						</li>
+						<li>
 							<Link href="/produtobase">Listar</Link>
 						</li>
 						<li>
