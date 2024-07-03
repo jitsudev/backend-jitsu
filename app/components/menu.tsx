@@ -37,7 +37,9 @@ export default async function Menu() {
 						<li>
 							<Link href="/produtos">Listar produtos</Link>
 						</li>
-
+						<li>
+							<Link href="/produtos/designer">Designer</Link>
+						</li>
 						<li>
 							<Link href="/produtos/categorias">Categorias</Link>
 						</li>
