@@ -1,5 +1,5 @@
 import prisma from "@/app/client";
-import FormUpdateProdutoBase from "../form";
+import FormUpdateProdutoBase from "../form_update";
 
 export default async function Page({ params }: { params: { id: string } }) {
 	const produto = await prisma.produtoBase.findFirst({ where: { id: parseInt(params.id) } });

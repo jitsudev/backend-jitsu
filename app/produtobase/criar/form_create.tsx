@@ -2,45 +2,41 @@
 
 import { ChangeEvent, useEffect, useState } from "react";
 import { getNomesProdutos, getCoresProduto, getTamanhosProduto, createProduto, stateType } from "../actions";
-
-import CoresDisponiveis from "./cores_disponiveis";
-import TamanhosDisponiveis from "./tamanhos_disponiveis";
 import { useFormState } from "react-dom";
+import { useRouter } from "next/navigation";
+import SeletorCores from "../ui/seletor_cores";
+import SeletorTamanhos from "../ui/seletor_tamanhos";
 
 export default function FormCreate() {
+	const router = useRouter();
 	const initialState = {
-		message: "ok",
+		message: "",
 		error: "",
 	};
 
-	const [formstate, formAction] = useFormState<stateType>(createProduto, initialState);
+	const [formstate, formAction] = useFormState(createProduto, initialState);
 	const [nomes, setNomes] = useState<Array<string>>(["Carregando"]);
 	const [selected, setSelected] = useState<string>("");
-	const [cores, setCores] = useState<Array<string>>([]);
-	const [tamanhos, setTamanhos] = useState<Array<string>>([]);
 
 	const handleNomes = async () => {
 		setNomes(await getNomesProdutos());
 	};
 
-	const handleCores = async (_selected: string) => {
-		setCores(await getCoresProduto(_selected));
-	};
-
-	const handleTamanhos = async (_selected: string) => {
-		setTamanhos(await getTamanhosProduto(_selected));
-	};
-
 	const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		const _selected = e.currentTarget.selectedOptions[0].value;
-		handleCores(_selected);
-		handleTamanhos(_selected);
+
 		setSelected(_selected);
 	};
 
 	useEffect(() => {
 		handleNomes();
 	}, [selected]);
+
+	useEffect(() => {
+		if (formstate.message == "ok") {
+			router.push("/produtobase");
+		}
+	}, [formstate]);
 
 	return (
 		<form action={formAction} method="POST">
@@ -67,12 +63,12 @@ export default function FormCreate() {
 				</div>
 				<div>
 					<span>Cores disponíveis:</span>
-					<CoresDisponiveis cores={cores} />
+					<SeletorCores produto={selected} />
 				</div>
 
 				<div>
 					<span>Tamanhos disponíveis:</span>
-					<TamanhosDisponiveis tamanhos={tamanhos} />
+					<SeletorTamanhos produto={selected} />
 				</div>
 				{formstate.error ? (
 					<div className="flex w-full bg-red-200 rounded p-4 justify-center items-center">

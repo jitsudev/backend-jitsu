@@ -1,8 +1,7 @@
 import Link from "next/link";
 import prisma from "../client";
-import DeleteButton from "./delete/delete_button";
-import ListaCores from "./lista_cores";
-import EditButton from "./edit_button";
+import ListaCores from "./ui/lista_cores";
+import EditButton from "./ui/edit_button";
 import { Trash2 } from "lucide-react";
 
 export default async function ListaProdutosBase() {

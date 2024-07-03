@@ -2,20 +2,17 @@
 
 import { ProdutoBase } from "@prisma/client";
 import { useFormState } from "react-dom";
-import { updateProduto } from "../actions";
-import { SubmitButton } from "@/app/components/submitButton";
-import CoresDisponiveis from "../criar/cores_disponiveis";
-import { ChangeEvent, useState } from "react";
-import { updateProp } from "@/app/util/tools";
+import { updateProduto, stateType } from "../actions";
+import { ChangeEvent, useEffect, useState } from "react";
 import Link from "next/link";
-
-type FormStateType = {
-	message: String;
-	error: String;
-};
+import { useRouter } from "next/navigation";
+import SeletorCores from "../ui/seletor_cores";
+import SeletorTamanhos from "../ui/seletor_tamanhos";
+import { SubmitButton } from "@/app/components/submitButton";
 
 export default function FormUpdateProdutoBase({ produto }: { produto: ProdutoBase }) {
-	const initialState: FormStateType = {
+	const router = useRouter();
+	const initialState: stateType = {
 		message: "",
 		error: "",
 	};
@@ -28,16 +25,20 @@ export default function FormUpdateProdutoBase({ produto }: { produto: ProdutoBas
 		setState({ ...state, [e.currentTarget.name]: e.currentTarget.value });
 	};
 
+	useEffect(() => {
+		if (formstate.message == "ok") {
+			router.push("/produtobase");
+		}
+	}, [formstate]);
+
 	return (
 		<form action={formAction} method="POST" className="flex flex-col gap-4" encType="application/json">
 			<input type="hidden" name="id" value={state.id} />
 			<input type="text" name="name" placeholder="Camisa Quality" className="rounded p-2" value={state.name} onChange={handleChange} />
 			<input type="text" name="cost" placeholder="39,90" className="rounded p-2" value={state.cost} onChange={handleChange} />
 			<input type="text" name="composition" placeholder="100% Algodão" className="rounded p-2" value={state.composition} onChange={handleChange} />
-			<input type="text" name="sku" placeholder="01101" className="rounded p-2" value={state.sku} onChange={handleChange} />
-			<div className="flex border-2 rounded p-2 justify-center items-center">
-				<CoresDisponiveis cores={state.cores} />
-			</div>
+			<SeletorCores produto={state.name} selected={state.cores.split(",")} />
+			<SeletorTamanhos produto={state.name} selected={state.tamanhos.split(",")} />
 			{formstate.error ? (
 				<div className="flex w-full bg-red-200 rounded p-4 justify-center items-center">
 					<span>{formstate.error}</span>

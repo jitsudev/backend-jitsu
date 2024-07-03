@@ -1,4 +1,4 @@
-import { CORES } from "../util/dimona";
+import { CORES } from "@/app/util/dimona";
 
 export default function ListaCores({ cores }: { cores: Array<string> }) {
 	return (

@@ -1,6 +1,6 @@
 import DeleteButton from "../delete_button";
 import prisma from "@/app/client";
-import ListaCores from "../../lista_cores";
+import ListaCores from "../../ui/lista_cores";
 import { ShieldQuestion } from "lucide-react";
 import { CloseButton } from "@/app/components/close_button";
 
@@ -14,6 +14,14 @@ export default async function DeleteConfirmation({ params }: { params: { id: str
 				<span className="text-xs font-bold">{_produto.composition}</span>
 				<span>R$ {parseInt(_produto.cost).toFixed(2)}</span>
 				<ListaCores cores={_produto.cores.split(",")} />
+				<div className="flex flex-col  items-centerw-full">
+					<span className="font-bold text-center">Tamanhos:</span>
+					<div className="flex flex-wrap gap-1">
+						{_produto.tamanhos.split(",").map((t) => (
+							<span>{t}</span>
+						))}
+					</div>
+				</div>
 				<span className="flex items-center gap-3 my-6 w-full text-center px-4 py-2 rounded bg-red-200">
 					<ShieldQuestion size={40} stroke="red" /> Você irá apagar um produto base, todos os produtos que usam este produto base serão afetados.
 				</span>
