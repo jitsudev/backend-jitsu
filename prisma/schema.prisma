@@ -30,6 +30,15 @@ model Catalogo {
   cor         String
   tamanho     String
   sku         String
+  mockup_url  String @default("")
+}
+
+model Mockup {
+  id          Int      @id @default(autoincrement())
+  produto     String
+  cor         String
+  url_frente  String
+  url_costas  String
 }
 
 model ProdutoBase{

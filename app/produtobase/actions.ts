@@ -1,8 +1,6 @@
 "use server";
 import prisma from "../client";
 import { Catalogo, ProdutoBase } from "@prisma/client";
-import { ExecException } from "child_process";
-import { error } from "console";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -92,20 +90,36 @@ export async function updateProduto(previousState: stateType, formData: FormData
 }
 
 /**
+ * Retorna um array com todos os produtos
+ */
+export async function getCatalog() {
+	return await prisma.catalogo.findMany();
+}
+
+/**
+ * Retorna um array com todos os produtos de mesmo nome
+ */
+export async function getProdutosByNome(nome: string) {
+	return await prisma.catalogo.findMany({ where: { nome } });
+}
+
+/**
  * Retorna um array com os nomes distintos dos produtos
  */
 export async function getNomesProdutos() {
 	return (await prisma.catalogo.findMany({ where: {}, distinct: "nome" })).flatMap(({ nome }) => nome);
 }
 
+/**
+ * Retorna um array com as cores distintas dos produtos com mesmo nome
+ */
 export async function getCoresProduto(nome: string) {
 	return (await prisma.catalogo.findMany({ where: { nome }, distinct: "cor" })).flatMap(({ cor }) => cor);
 }
 
+/**
+ * Retorna um array com os Tamanhos distintos dos produtos com mesmo nome
+ */
 export async function getTamanhosProduto(nome: string) {
 	return (await prisma.catalogo.findMany({ where: { nome }, distinct: "tamanho" })).flatMap(({ tamanho }) => tamanho);
-}
-
-export async function getProdutosByNome(nome: string) {
-	return await prisma.catalogo.findMany({ where: { nome } });
 }
