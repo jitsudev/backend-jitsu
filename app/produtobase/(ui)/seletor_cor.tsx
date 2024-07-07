@@ -1,6 +1,6 @@
 export default function SeletorCor({ cores }: { cores: Array<string> }) {
 	return (
-		<select name="cor" className="flex w-full">
+		<select name="cor" className="w-full rounded p-2">
 			<option value="" selected>
 				Selecione uma cor
 			</option>
