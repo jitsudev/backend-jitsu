@@ -5,7 +5,7 @@ import CatalogFilters from "./filters";
 import { Prisma } from "@prisma/client";
 
 export default async function ProdutoBaseSelector({ params, searchParams }: { params: { slug: string }; searchParams: { [key: string]: string | string[] | undefined } }) {
-	const { nome, cor, tamanho, estilo, sku, ordenarpor, ordem } = searchParams;
+	const { nome, cor, tamanho, estilo, sku, ordenarpor, ordem, custo, composicao } = searchParams;
 
 	const orderBy: Prisma.CatalogoOrderByWithRelationAndSearchRelevanceInput = {
 		...(ordenarpor ? { [ordenarpor as string]: ordem } : {}),
@@ -13,10 +13,13 @@ export default async function ProdutoBaseSelector({ params, searchParams }: { pa
 
 	const _produto = await prisma.catalogo.findMany({
 		where: {
+			ativo: true,
 			nome: { contains: nome as string, mode: "insensitive" },
 			cor: { contains: cor as string, mode: "insensitive" },
 			tamanho: { contains: tamanho as string, mode: "insensitive" },
 			estilo: { contains: estilo as string, mode: "insensitive" },
+			custo: { contains: custo as string, mode: "insensitive" },
+			composicao: { contains: composicao as string, mode: "insensitive" },
 			sku: { contains: sku as string, mode: "insensitive" },
 		},
 		orderBy,
@@ -31,7 +34,7 @@ export default async function ProdutoBaseSelector({ params, searchParams }: { pa
 				<span className="w-1/12">Tamanho </span>
 				<span className="w-2/12">Cor</span>
 				<span className="w-2/12">SKU</span>
-				<span className="w-2/12">Estilo </span>
+				<span className="w-2/12">Custo </span>
 				<span className="w-2/12">Disponibilidade</span>
 			</div>
 
@@ -43,9 +46,9 @@ export default async function ProdutoBaseSelector({ params, searchParams }: { pa
 					</span>
 
 					<span className="w-1/12">{produto.tamanho} </span>
-					<span className="w-2/12"> {produto.cor}</span>
-					<span className="w-2/12"> {produto.sku}</span>
-					<span className="w-2/12">{produto.estilo} </span>
+					<span className="w-2/12">{produto.cor}</span>
+					<span className="w-2/12">{produto.sku}</span>
+					<span className="w-2/12">R$ {produto.custo} </span>
 					<span className="w-2/12">
 						<AvaliabilityChecker sku={produto.sku} />
 					</span>

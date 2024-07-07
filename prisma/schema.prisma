@@ -25,20 +25,25 @@ model User {
 
 model Catalogo {
   id          Int      @id @default(autoincrement())
+  ativo       Boolean @default(true)
   nome        String
   estilo      String
   cor         String
   tamanho     String
+  custo       String @default("")
+  composicao  String @default("")
   sku         String
-  mockup_url  String @default("")
+  createdAt   DateTime @default(now())
+  modifiedAt  DateTime @default(now())
 }
 
 model Mockup {
   id          Int      @id @default(autoincrement())
   produto     String
   cor         String
-  posicao     String
+  descricao   String @default("")
   url         String
+  key         String @default("")
 }
 
 model ProdutoBase{

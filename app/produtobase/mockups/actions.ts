@@ -32,17 +32,17 @@ export async function getMockup(produto: string, cor: string) {
 export async function createMockup(state: FormStateType, formData: FormData) {
 	const _produto = formData.get("produto") as string;
 	const _cor = formData.get("cor") as string;
-	const _posicao = formData.get("posicao") as string;
+	const _descricao = formData.get("descricao") as string;
 	const _mockup = formData.getAll("mockup") as File[];
-	console.log(_produto, _cor, _posicao, _mockup);
+	console.log(_produto, _cor, _descricao, _mockup);
 	// Upload imagem
 
-	if (!_produto || !_cor || !_posicao || !_mockup) return { message: "", error: "Os campos não podem ficar em branco" };
+	if (!_produto || !_cor || !_descricao || !_mockup) return { message: "", error: "Os campos não podem ficar em branco" };
 
 	const _upload = await utapi.uploadFiles(_mockup);
 	const { data } = _upload[0];
 	if (data) {
-		const _mockup = await prisma.mockup.create({ data: { produto: _produto, cor: _cor, posicao: _posicao, url: data.url } });
+		const _mockup = await prisma.mockup.create({ data: { produto: _produto, cor: _cor, descricao: _descricao, url: data.url, key: data.key } });
 		if (_mockup) {
 			revalidatePath("/produtobase/mockups");
 			return { message: "ok", error: "" };

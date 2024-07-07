@@ -32,7 +32,7 @@ export default function FormCreateMockup() {
 					<SeletorCor cores={cores} />
 				</div>
 				<label htmlFor="posicao">Descrição da foto:</label>
-				<input type="text" name="posicao" className="border-2 p-2 rounded" placeholder="Ex: Frente" />
+				<input type="text" name="descricao" className="border-2 p-2 rounded" placeholder="Ex: Frente" />
 				<input type="file" name="mockup" />
 				{formstate.error && (
 					<div className="flex w-full bg-red-200 rounded p-4 justify-center items-center">

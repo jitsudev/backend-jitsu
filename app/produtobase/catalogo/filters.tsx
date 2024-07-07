@@ -58,6 +58,12 @@ export default function CatalogFilters() {
 					<option value="cor" selected={parametro == "cor"}>
 						Cor
 					</option>
+					<option value="composicao" selected={parametro == "composicao"}>
+						Composição
+					</option>
+					<option value="custo" selected={parametro == "custo"}>
+						Custo
+					</option>
 					<option value="sku" selected={parametro == "sku"}>
 						SKU
 					</option>
@@ -79,6 +85,12 @@ export default function CatalogFilters() {
 					</option>
 					<option value="cor" selected={ordenarpor == "cor"}>
 						Cor
+					</option>
+					<option value="composicao" selected={ordenarpor == "composicao"}>
+						Composição
+					</option>
+					<option value="custo" selected={ordenarpor == "custo"}>
+						Custo
 					</option>
 					<option value="sku" selected={ordenarpor == "sku"}>
 						SKU
