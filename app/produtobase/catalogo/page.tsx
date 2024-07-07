@@ -27,10 +27,11 @@ export default async function ProdutoBaseSelector({ params, searchParams }: { pa
 			<CatalogFilters />
 			<div className="flex justify-between items-center gap-2 bg-black text-white mb-2 p-2 rounded">
 				<span className="w-3/12">Nome </span>
-				<span className="w-2/12">Estilo </span>
+
 				<span className="w-1/12">Tamanho </span>
 				<span className="w-2/12">Cor</span>
 				<span className="w-2/12">SKU</span>
+				<span className="w-2/12">Estilo </span>
 				<span className="w-2/12">Disponibilidade</span>
 			</div>
 
@@ -40,10 +41,11 @@ export default async function ProdutoBaseSelector({ params, searchParams }: { pa
 						<CorCircle nome={produto.cor} />
 						{produto.nome}{" "}
 					</span>
-					<span className="w-2/12">{produto.estilo} </span>
+
 					<span className="w-1/12">{produto.tamanho} </span>
 					<span className="w-2/12"> {produto.cor}</span>
 					<span className="w-2/12"> {produto.sku}</span>
+					<span className="w-2/12">{produto.estilo} </span>
 					<span className="w-2/12">
 						<AvaliabilityChecker sku={produto.sku} />
 					</span>

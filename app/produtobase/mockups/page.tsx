@@ -1,25 +1,22 @@
-"use client";
-import { ChangeEvent, useState } from "react";
-import SeletorProdutos from "../(ui)/seletor_produtos";
-import { getCoresProduto } from "../actions";
+import prisma from "@/app/client";
 import MockupCard from "./mockup_card";
+import { Suspense } from "react";
+import FormCreateMockup from "./form_create";
 
-export default function Page() {
-	const [produto, setProduto] = useState<string>("");
-	const [cores, setCores] = useState<Array<string>>([]);
+const Loading = () => <div className="flex h-[180px] w-[135px] bg-gray-200 rounded overflow-hidden items-center justify-center">Loading</div>;
 
-	const handleChange = async (e: ChangeEvent<HTMLSelectElement>) => {
-		const _selected = e.currentTarget.selectedOptions[0].value;
-		setProduto(_selected);
-		setCores(await getCoresProduto(_selected));
-	};
-
+export default async function Page() {
+	const mockups = await prisma.mockup.findMany();
 	return (
 		<div className="flex flex-col gap-2 w-full">
-			<SeletorProdutos onChange={handleChange} />
-			{cores.map((cor) => (
-				<MockupCard produto={produto} cor={cor} />
-			))}
+			<div className="flex gap-2">
+				{mockups?.map((mockup) => (
+					<Suspense key={mockup.id} fallback={<Loading />}>
+						<MockupCard mockup={mockup} />
+					</Suspense>
+				))}
+			</div>
+			<FormCreateMockup />
 		</div>
 	);
 }

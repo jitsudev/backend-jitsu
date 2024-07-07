@@ -37,8 +37,8 @@ model Mockup {
   id          Int      @id @default(autoincrement())
   produto     String
   cor         String
-  url_frente  String
-  url_costas  String
+  posicao     String
+  url         String
 }
 
 model ProdutoBase{

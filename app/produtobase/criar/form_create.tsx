@@ -70,11 +70,11 @@ export default function FormCreate() {
 					<span>Tamanhos disponíveis:</span>
 					<SeletorTamanhos produto={selected} />
 				</div>
-				{formstate.error ? (
+				{formstate.error && (
 					<div className="flex w-full bg-red-200 rounded p-4 justify-center items-center">
 						<span>{formstate.error}</span>
 					</div>
-				) : null}
+				)}
 				<div>
 					<button type="submit" className="w-full rounded p-2 bg-green-500">
 						Adicionar produto
