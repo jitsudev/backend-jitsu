@@ -1,6 +1,7 @@
 "use server";
 import prisma from "@/app/client";
 import utapi from "@/app/fileserver";
+import { Mockup } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export type FormStateType = {
@@ -29,11 +30,11 @@ export async function getMockup(produto: string, cor: string) {
 	return await prisma.mockup.findMany({ where: { produto, cor } });
 }
 
-export async function createMockup(state: FormStateType, formData: FormData) {
+export async function createMockup(previousState: FormStateType, formData: FormData) {
 	const _produto = formData.get("produto") as string;
 	const _cor = formData.get("cor") as string;
 	const _descricao = formData.get("descricao") as string;
-	const _mockup = formData.getAll("mockup") as File[];
+	const _mockup = formData.getAll("file") as File[];
 	console.log(_produto, _cor, _descricao, _mockup);
 	// Upload imagem
 
@@ -46,8 +47,20 @@ export async function createMockup(state: FormStateType, formData: FormData) {
 		if (_mockup) {
 			revalidatePath("/produtobase/mockups");
 			return { message: "ok", error: "" };
+		} else {
+			return { message: "", error: "Falha ao criar mockup" };
 		}
 	}
 
 	return { message: "ok", error: "" };
+}
+
+export async function deleteMockup(mockup: Mockup) {
+	const _del = await utapi.deleteFiles(mockup.key);
+	if (_del.success) {
+		const _mockup = await prisma.mockup.delete({ where: { id: mockup.id } });
+		if (_mockup) {
+			revalidatePath("/produtobase/mockups");
+		}
+	}
 }

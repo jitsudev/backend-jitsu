@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, useEffect, useState } from "react";
-import { getNomesProdutos, getCoresProduto, getTamanhosProduto, createProduto, stateType } from "../actions";
+import { getNomesProdutos, createProduto } from "../actions";
 import { useFormState } from "react-dom";
 import { useRouter } from "next/navigation";
 import SeletorCores from "../ui/seletor_cores";
